@@ -97,5 +97,8 @@
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "vue": {
+    "baseUrl": "/wiremock-ui"
   }
 }
