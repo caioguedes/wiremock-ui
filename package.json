@@ -61,6 +61,8 @@
     "not ie <= 8"
   ],
   "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["lcov", "html"],
     "moduleFileExtensions": [
       "js",
       "jsx",
