@@ -99,6 +99,6 @@
     ]
   },
   "vue": {
-    "baseUrl": "/wiremock-ui"
+    "baseUrl": "wiremock-ui"
   }
 }
