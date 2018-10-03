@@ -3,7 +3,7 @@
     .navbar-start(v-if="$route.path.includes('/servers')")
       .navbar-item.has-dropdown.is-hoverable(v-if="$store.state.servers.length > 0")
         a.navbar-link
-          Server(:server="$store.state.servers[$route.params.serverIndex || 0]")
+          Server(:server="$store.getters.currentServer()")
         .navbar-dropdown
           template(v-for="(server, index) in $store.getters.sortedServers")
             router-link.navbar-item(:to="{name: 'mappings', params: {serverIndex: index}}")

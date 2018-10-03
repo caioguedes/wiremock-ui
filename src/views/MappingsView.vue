@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     retrieveMappings () {
-      this.$store.getters.currentMock.allStubMappings().then(res => {
+      this.$store.getters.currentMock().allStubMappings().then(res => {
         this.mappings = res.mappings
         this.mapping = this.mappings.find(mapping => mapping.id === this.$route.params.mappingId)
       }).catch(() => {
