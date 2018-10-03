@@ -13,8 +13,8 @@
             b-icon(icon="plus")
             | Add New Server
     .navbar-end(v-if="$route.path.includes('/servers')")
-      router-link.navbar-item(to="mappings" active-class="is-active") Mappings
-      router-link.navbar-item(to="requests" active-class="is-active") Requests
+      router-link.navbar-item(:to="{name: 'mappings'}" active-class="is-active") Mappings
+      router-link.navbar-item(:to="{name: 'requests'}" active-class="is-active") Requests
     AddServerModal(ref="addServerModel")
 </template>
 
