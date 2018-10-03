@@ -1,6 +1,7 @@
 <template lang="pug">
-  .indicator.is-danger(v-if="status")
-  .indicator.is-danger(v-else)
+  .indicator.has-background-success(v-if="status === true")
+  .indicator.has-background-danger(v-else-if="status === false")
+  .indicator.has-background-grey-light(v-else)
 </template>
 
 <script>
@@ -9,36 +10,42 @@ export default {
   props: ['mock'],
   data () {
     return {
-      status: false
+      status: null
     }
   },
   created () {
+    this.ping()
     setInterval(() => {
+      if (this.isVisible()) {
+        this.ping()
+      }
+    }, 5000)
+  },
+  methods: {
+    ping () {
       if (this.mock) {
         this.mock.healthcheck().then(healthy => {
           this.status = healthy
         })
       }
-    }, 5000)
+    },
+    isVisible () {
+      return !!(this.$el && this.$el.offsetLeft)
+    }
+  },
+  watch: {
+    mock () {
+      this.ping()
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-  @import '~bulma/sass/utilities/initial-variables';
-
   .indicator {
     display: inline-block;
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-
-    &.is-danger {
-      background: $red;
-    }
-
-    &.is-success {
-      background: $green;
-    }
   }
 </style>

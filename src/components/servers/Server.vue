@@ -2,13 +2,12 @@
   .is-clearfix.server
     .is-pulled-left.has-text-left
       .is-size-4
-        ServerIndicator(:mock="mock")
+        ServerIndicator(:mock="server.mock")
         | {{server.name}}
-      .has-text-grey.is-size-7 {{server.host}}:{{server.port}}
+      .has-text-grey.is-size-7 {{server.protocol.toLowerCase()}}://{{server.host}}:{{server.port}}
 </template>
 
 <script>
-import { connect } from 'wiremock-client'
 import ServerIndicator from './StatusIndicator'
 
 export default {
@@ -16,13 +15,6 @@ export default {
   props: ['server'],
   components: {
     ServerIndicator
-  },
-  computed: {
-    mock () {
-      if (this.server) {
-        return connect(this.server.host, this.server.port)
-      }
-    }
   }
 }
 </script>

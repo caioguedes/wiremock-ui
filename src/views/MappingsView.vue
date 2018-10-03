@@ -1,5 +1,6 @@
 <template lang="pug">
   section
+    h1 MAPPINGS
     MappingList
 </template>
 

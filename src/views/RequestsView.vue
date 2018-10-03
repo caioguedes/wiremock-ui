@@ -1,8 +1,6 @@
-<template>
-  <section>
-    <RequestList></RequestList>
-    Requests
-  </section>
+<template lang="pug">
+  section
+    h1 REQUESTS
 </template>
 
 <script>
