@@ -15,7 +15,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import formValidationMixin from '../../mixins/FormValidation'
+import formValidationMixin from '../../mixins/form-validation.mixin'
 import { integer, minValue, maxValue, required } from 'vuelidate/lib/validators'
 
 export default {

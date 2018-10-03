@@ -13,11 +13,9 @@
 <script>
 import ServerInfoForm from './ServerInfoForm'
 import store from '../../store'
-import formValidationMixin from '../../mixins/FormValidation'
 
 export default {
   name: 'AddServerModal',
-  mixins: [formValidationMixin],
   data () {
     return {
       active: false,

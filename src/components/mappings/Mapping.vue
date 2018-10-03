@@ -1,6 +1,6 @@
 <template lang="pug">
   router-link.has-text-left(:to="{name: 'mappings', params: {mappingId: mapping.id}}")
-    strong.has-text-grey-dark.is-size-5 {{ url }}
+    strong.has-text-grey-dark.is-size-6 {{ url }}
     .is-clearfix
       .is-pulled-left
         Method(:method="mapping.request.method")
