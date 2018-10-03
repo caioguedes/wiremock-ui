@@ -1,5 +1,7 @@
 import router from '../../router'
 
+import Sorting from '../../utils/sorting'
+
 export default {
   currentServer (state) {
     const serverIndex = router.history.current.params.serverIndex
@@ -12,5 +14,8 @@ export default {
     if (server) {
       return server.mock
     }
+  },
+  sortedServers (state) {
+    return state.servers.sort((a, b) => Sorting.compareAlpha(a.name, b.name))
   }
 }

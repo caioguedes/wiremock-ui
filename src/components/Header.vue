@@ -5,7 +5,7 @@
         a.navbar-link
           Server(:server="$store.state.servers[$route.params.serverIndex || 0]")
         .navbar-dropdown
-          template(v-for="(server, index) in $store.state.servers")
+          template(v-for="(server, index) in $store.getters.sortedServers")
             router-link.navbar-item(:to="{name: 'mappings', params: {serverIndex: index}}")
               Server(:server="server" :key="index")
           hr.dropdown-divider
