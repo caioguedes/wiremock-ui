@@ -7,6 +7,11 @@ branches:
 cache:
   directories:
     - node_modules
+    - ~/.npm
+    - ~/.cache
+  override:
+    - npm ci
+    - npm run cy:verify
 before_script:
   - npm run lint
 script:
