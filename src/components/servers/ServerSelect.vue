@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AddServerModal from '../components/servers/AddServerModal'
+import AddServerModal from './AddServerModal'
 
 export default {
   name: 'ServerSelect',
