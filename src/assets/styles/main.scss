@@ -5,3 +5,11 @@ html, body {
 .flex-end {
   justify-content: flex-end;
 }
+
+.shadow {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.side-shadow {
+  box-shadow: .125rem 0 .25rem rgba(0,0,0,.075)!important;
+}

@@ -1,6 +1,6 @@
 <template lang="pug">
   section
-    MappingList(:mappings="mappings")
+    MappingList.shadow(:mappings="mappings")
     article
       MappingEditor(v-if="mapping" :mapping="mapping")
       div(v-else) SELECT MAPPING

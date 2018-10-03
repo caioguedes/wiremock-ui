@@ -1,6 +1,6 @@
 <template lang="pug">
   router-link.has-text-left(:to="{name: 'mappings', params: {mappingId: mapping.id}}")
-    strong {{ url }}
+    strong.has-text-grey-dark.is-size-5 {{ url }}
     .is-clearfix
       .is-pulled-left
         Method(:method="mapping.request.method")
@@ -21,16 +21,28 @@ export default {
   },
   computed: {
     url () {
-      return this.mapping.request.urlPattern
+      const req = this.mapping.request
+      return req.url || req.urlPattern || req.urlPath || req.urlPathPattern
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 a {
+  strong {
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+
   display: block;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #E3E3E3;
   padding: 0.5rem;
+  cursor: pointer;
+  transition: background 0.5s;
+
+  &:hover {
+      background: lightgray;
+  }
 }
 </style>

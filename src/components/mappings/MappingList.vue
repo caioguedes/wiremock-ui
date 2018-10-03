@@ -1,5 +1,5 @@
 <template lang="pug">
-  ul#mapping-list
+  ul#mapping-list.has-background-white-bis.side-shadow
     Mapping(v-for="mapping in mappings" :mapping="mapping" :key="mapping.id")
 </template>
 
@@ -17,8 +17,9 @@ export default {
 
 <style scoped>
   #mapping-list {
-    min-width: 20rem;
-    max-width: 20rem;
+    z-index: 2;
+    min-width: 25rem;
+    max-width: 25rem;
     height: 100%;
     overflow-y: auto;
   }

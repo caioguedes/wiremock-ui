@@ -1,5 +1,5 @@
 <template lang="pug">
-  header.navbar.is-light(role="navigation")
+  header.navbar.is-light.shadow(role="navigation")
     .navbar-start(v-if="$route.path.includes('/servers')")
       .navbar-item.has-dropdown.is-hoverable(v-if="$store.state.servers.length > 0")
         a.navbar-link

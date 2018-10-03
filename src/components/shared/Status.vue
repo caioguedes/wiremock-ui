@@ -19,7 +19,7 @@ export default {
         return 'has-background-success'
       }
       if (this.status < 400) {
-        return 'has-background-warn'
+        return 'has-background-warning'
       }
       return 'has-background-danger'
     }
