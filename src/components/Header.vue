@@ -12,6 +12,8 @@
           a.navbar-item(@click="$refs.addServerModel.open()")
             b-icon(icon="plus")
             | Add New Server
+    .navbar-center
+      img(src="../assets/wiremock.png")
     .navbar-end(v-if="$route.path.includes('/servers')")
       router-link.navbar-item(:to="{name: 'mappings'}" active-class="is-active") Mappings
       router-link.navbar-item(:to="{name: 'requests'}" active-class="is-active") Requests
@@ -40,4 +42,15 @@ export default {
  .icon {
    padding-right: 1rem;
  }
+
+  .navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    img {
+      height: 65px;
+      padding: 0.5rem;
+    }
+  }
 </style>
