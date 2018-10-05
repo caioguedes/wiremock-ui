@@ -5,13 +5,8 @@
 </template>
 
 <script>
-import AddServerModal from './AddServerModal'
-
 export default {
-  name: 'ServerSelect',
-  components: {
-    AddServerModal
-  },
+  name: 'ServerSelectView',
   created () {
     console.log('created')
     let state = this.$store.state

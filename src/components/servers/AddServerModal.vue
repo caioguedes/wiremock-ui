@@ -12,7 +12,7 @@
 
 <script>
 import ServerInfoForm from './ServerInfoForm'
-import store from '../../store'
+import store from '../../store/index'
 
 export default {
   name: 'AddServerModal',

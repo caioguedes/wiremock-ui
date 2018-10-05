@@ -6,10 +6,13 @@ import Buefy from 'buefy'
 import '../node_modules/buefy/dist/buefy.css'
 import './assets/styles/main.scss'
 import * as vuewMoment from 'vue-moment'
+import AddServerModel from './components/servers/AddServerModal'
 
 Vue.config.productionTip = false
 Vue.use(Buefy)
 Vue.use(vuewMoment)
+
+Vue.component('AddServerModal', AddServerModel)
 
 new Vue({
   router,

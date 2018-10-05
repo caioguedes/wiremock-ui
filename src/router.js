@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import MappingsView from './views/MappingsView'
-import ServerSelect from './components/servers/ServerSelect'
+import ServerSelectView from './views/ServerSelectView'
 import RequestsView from './views/RequestsView'
 import ServerView from './views/ServerView'
 
@@ -12,7 +12,7 @@ export default new Router({
     {
       name: 'root',
       path: '/',
-      component: ServerSelect
+      component: ServerSelectView
     },
     {
       path: '/servers/:serverIndex',

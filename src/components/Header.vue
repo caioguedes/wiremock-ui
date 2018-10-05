@@ -22,12 +22,10 @@
 
 <script>
 import Server from './servers/Server'
-import AddServerModal from './servers/AddServerModal'
 
 export default {
   name: 'Header',
   components: {
-    AddServerModal,
     Server
   }
 }
