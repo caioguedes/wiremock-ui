@@ -17,6 +17,7 @@
     .navbar-end(v-if="$route.path.includes('/servers')")
       router-link.navbar-item(:to="{name: 'mappings'}" active-class="is-active") Mappings
       router-link.navbar-item(:to="{name: 'requests'}" active-class="is-active") Requests
+      router-link.navbar-item(:to="{name: 'settings'}" active-class="is-active") Settings
     AddServerModal(ref="addServerModel")
 </template>
 

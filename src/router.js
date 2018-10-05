@@ -4,6 +4,7 @@ import MappingsView from './views/MappingsView'
 import ServerSelectView from './views/ServerSelectView'
 import RequestsView from './views/RequestsView'
 import ServerView from './views/ServerView'
+import ServerSettingsView from './views/ServerSettingsView'
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ export default new Router({
           name: 'mappings',
           path: 'mappings/:mappingId?',
           component: MappingsView
+        },
+        {
+          name: 'settings',
+          path: 'settings',
+          component: ServerSettingsView
         },
         {
           name: 'requests',
