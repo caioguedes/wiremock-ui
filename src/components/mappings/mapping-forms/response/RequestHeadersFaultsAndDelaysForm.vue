@@ -15,11 +15,11 @@
         .panel-block
           .full-width
             div(v-if="isTabActive('headers')")
-              .has-text-centered(v-if="form.headers.length <= 0") No Header Matchers
+              .has-text-centered(v-if="form.headers.length <= 0") No Response Headers
               KeyMatcherValue(v-for="(header, index) in form.headers" :key="'header' + index"
                 :matcher="header" @change="matcherChanged('headers', index, $event)")
-            div(v-if="isTabActive('delay')") Delay
-            div(v-if="isTabActive('faults')") Faults
+            div(v-if="isTabActive('delay')") This feature has not yet been implemented.
+            div(v-if="isTabActive('faults')") This feature has not yet been implemented.
 </template>
 
 <script>
@@ -35,6 +35,9 @@ export default {
         faults: []
       }
     }
+  },
+  created () {
+    console.log(this.response)
   },
   methods: {
     addHeader () {

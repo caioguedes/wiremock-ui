@@ -9,6 +9,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   plugins: [createPersistedState({
+    paths: [
+      'servers'
+    ],
     getState: (key, storage) => {
       let state = JSON.parse(storage.getItem(key))
       if (state && Array.isArray(state.servers)) {
@@ -25,7 +28,11 @@ export default new Vuex.Store({
     }
   })],
   state: {
-    servers: []
+    servers: [],
+    mapping: {
+      form: {},
+      validations: {}
+    }
   },
   getters,
   mutations

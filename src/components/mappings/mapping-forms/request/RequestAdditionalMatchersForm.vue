@@ -66,7 +66,6 @@ export default {
     }
   },
   created () {
-    console.log(this.request)
     this.form.headers = this.convertToMatchers(this.request.headers)
     this.form.queryParams = this.convertToMatchers(this.request.queryParams)
     this.form.cookies = this.convertToMatchers(this.request.cookies)

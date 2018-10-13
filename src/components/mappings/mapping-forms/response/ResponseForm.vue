@@ -3,7 +3,7 @@
     .is-size-4 Response
     hr
     ResponseBasicForm(:response="response" @change="form = Object.assign(form, $event)")
-    RequestHeadersFaultsAndDelaysForm
+    RequestHeadersFaultsAndDelaysForm(:response="response" @change="form = Object.assign(form, $event)")
     ResponseBodyForm(v-if="form.responseType !== 'NO_CONTENT'" :response="response" @change="form = Object.assign(form, $event)")
 </template>
 

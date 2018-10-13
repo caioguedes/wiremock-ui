@@ -16,6 +16,12 @@ export default {
   watch: {
     form: {
       handler () {
+        if (this.$v) {
+          this.$store.commit('mappingValidationChange', {
+            name: this.$options.name,
+            valid: !this.$v.$invalid
+          })
+        }
         this.$emit('change', this.form)
       },
       deep: true
