@@ -2,8 +2,34 @@ html, body {
   height: 100%;
 }
 
-.flex-end {
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex-grow: 1;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.is-fill {
+  flex-grow: 1;
+  flex-basis: auto;
+  width: 100%;
+}
+
+.justify-flex-end {
   justify-content: flex-end;
+}
+
+.align-item-center {
+  align-items: center;
+}
+
+.align-flex-end {
+  align-items: flex-end;
 }
 
 .shadow {
@@ -12,4 +38,47 @@ html, body {
 
 .side-shadow {
   box-shadow: .125rem 0 .25rem rgba(0,0,0,.075)!important;
+}
+
+.top-shadow {
+  box-shadow: 0 -.125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.v-spacer {
+  height: 1rem;
+}
+
+hr {
+  margin-top: 0.5rem;
+}
+
+.control.full-width {
+
+  span.select, select {
+    width: 100%;
+  }
+
+}
+
+.columns.full-width {
+  margin: -0.75rem 0 0;
+}
+
+.disable-bulma .number {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 0;
+  display: inline;
+  font-size: 1rem;
+  height: auto;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-right: 1.5rem;
+  min-width: 2.5em;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  vertical-align: top;
 }

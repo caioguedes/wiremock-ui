@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
   #mapping-list {
-    z-index: 2;
+    z-index: 20;
     min-width: 25rem;
     max-width: 25rem;
     height: 100%;

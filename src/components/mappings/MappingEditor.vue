@@ -1,19 +1,33 @@
 <template lang="pug">
-  pre.has-text-left.has-background-white {{ mapping | pretty }}
+  #mapping-editor
+    MappingForm(:mapping="mapping")
+    MappingEditorFooter
 </template>
 
 <script>
+import MappingForm from './mapping-forms/MappingForm'
+import MappingEditorFooter from './MappingEditorFooter'
+
 export default {
   name: 'MappingEditor',
   props: ['mapping'],
-  filters: {
-    pretty: function (value) {
-      return JSON.stringify(value, null, 2)
+  data () {
+    return {
+      content: ''
     }
+  },
+  components: {
+    MappingForm,
+    MappingEditorFooter
   }
 }
 </script>
 
 <style scoped>
-
+  #mapping-editor {
+    height: 100%;
+    overflow-x: hidden;
+    width: 100%;
+    padding: 2rem 2rem 6rem;
+  }
 </style>

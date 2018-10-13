@@ -7,13 +7,15 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e"
+    "test:e2e": "vue-cli-service test:e2e",
+    "ui": "vue ui"
   },
   "dependencies": {
     "buefy": "^0.6.7",
     "builtin-status-codes": "^3.0.0",
     "vue": "^2.5.17",
     "vue-moment": "^4.0.0",
+    "vue-prismjs": "^1.2.0",
     "vue-router": "^3.0.1",
     "vue2-ace-editor": "0.0.11",
     "vuelidate": "^0.7.4",

@@ -12,5 +12,13 @@ export default {
         return 'is-danger'
       }
     }
+  },
+  watch: {
+    form: {
+      handler () {
+        this.$emit('change', this.form)
+      },
+      deep: true
+    }
   }
 }

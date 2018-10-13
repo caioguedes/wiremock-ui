@@ -1,5 +1,8 @@
 <template lang="pug">
-  span(:class="statusGroup") {{ status }} - {{ status | statusCode }}
+  .is-inline
+    span(:class="statusGroup" v-if="statusCodeValid(status)")
+      span {{ status }}&nbsp;-&nbsp;
+      span(v-if="statusExists(status)") {{ status | statusCode }}
 </template>
 
 <script>
@@ -23,12 +26,20 @@ export default {
       }
       return 'has-background-danger'
     }
+  },
+  methods: {
+    statusCodeValid (status) {
+      return status && this.statusExists(status)
+    },
+    statusExists (status) {
+      return !!statusCodes[status]
+    }
   }
 }
 </script>
 
 <style scoped>
-  span {
+  .is-inline > span {
     padding: 0.1rem 0.2rem;
     border-radius: 0.2rem;
     color: white;

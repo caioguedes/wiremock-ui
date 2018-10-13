@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import RequestList from '../components/requests/RequestList'
+import RequestList from '../components/requests/request-list/RequestList'
 import RequestDetails from '../components/requests/RequestDetails'
 
 export default {

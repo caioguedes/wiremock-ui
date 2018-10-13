@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MappingList from '../components/mappings/MappingList'
+import MappingList from '../components/mappings/mapping-list/MappingList'
 import MappingEditor from '../components/mappings/MappingEditor'
 
 export default {

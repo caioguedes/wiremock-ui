@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Method from '../shared/Method'
-import Status from '../shared/Status'
+import Method from '../../shared/Method'
+import Status from '../../shared/Status'
 
 export default {
   name: 'Request',
