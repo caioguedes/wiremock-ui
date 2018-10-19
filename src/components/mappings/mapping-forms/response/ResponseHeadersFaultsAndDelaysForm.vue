@@ -6,43 +6,44 @@
           strong Headers, Delays, & Faults
         p.panel-tabs
           a(@click="switchTab('headers')" :class="{'is-active': isTabActive('headers')}")
-            | Headers{{ form.bodyPatterns | count }}
+            | Headers{{ headers | count }}
           a(@click="switchTab('delay')" :class="{'is-active': isTabActive('delay')}")
             | Delay
           a(@click="switchTab('faults')" :class="{'is-active': isTabActive('faults')}")
             | Faults
-          b-icon.is-pulled-right(v-if="isTabActive('headers')" icon="plus" @click.native="addHeader()")
+          b-icon.is-pulled-right(v-if="isTabActive('headers')" icon="plus" @click.native="$store.commit('addResponseHeader')")
         .panel-block
           .full-width
             div(v-if="isTabActive('headers')")
-              .has-text-centered(v-if="form.headers.length <= 0") No Response Headers
-              KeyMatcherValue(v-for="(header, index) in form.headers" :key="'header' + index"
-                :matcher="header" @change="matcherChanged('headers', index, $event)")
+              .has-text-centered(v-if="headers.length <= 0") No Response Headers
+              KeyValue(v-for="(header, index) in headers" :key="'header' + index"
+                :matcher="header" @change="$store.commit('responseHeaderChanged', {index, value: $event})")
             div(v-if="isTabActive('delay')") This feature has not yet been implemented.
             div(v-if="isTabActive('faults')") This feature has not yet been implemented.
 </template>
 
 <script>
+import KeyValue from '../../../shared/KeyValue'
+import { mapFields } from 'vuex-map-fields'
+
 export default {
-  name: 'RequestFaultsAndDelaysForm',
+  name: 'ResponseHeadersFaultsAndDelaysForm',
+  computed: {
+    ...mapFields([
+      'mapping.response.headers',
+      'mapping.response.faults'
+    ])
+  },
+  components: {
+    KeyValue
+  },
   data () {
     return {
       responseAdvOpts: false,
-      activeTab: 'headers',
-      form: {
-        headers: [],
-        delay: null,
-        faults: []
-      }
+      activeTab: 'headers'
     }
   },
-  created () {
-    console.log(this.response)
-  },
   methods: {
-    addHeader () {
-      this.form.headers.push({})
-    },
     switchTab (tab) {
       this.activeTab = tab
     },

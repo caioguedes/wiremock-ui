@@ -3,14 +3,14 @@
     .is-size-4 Response
     hr
     ResponseBasicForm
-    RequestHeadersFaultsAndDelaysForm
+    ResponseHeadersFaultsAndDelaysForm
     ResponseBodyForm(v-if="responseType && responseType !== 'NO_CONTENT' && body")
 </template>
 
 <script>
 import ResponseBasicForm from './ResponseBasicForm'
 import ResponseBodyForm from './ResponseBodyForm'
-import RequestHeadersFaultsAndDelaysForm from './RequestHeadersFaultsAndDelaysForm'
+import ResponseHeadersFaultsAndDelaysForm from './ResponseHeadersFaultsAndDelaysForm'
 import formValidationMixin from '../../../../mixins/form-validation.mixin'
 import { mapFields } from 'vuex-map-fields'
 
@@ -20,7 +20,7 @@ export default {
   components: {
     ResponseBodyForm,
     ResponseBasicForm,
-    RequestHeadersFaultsAndDelaysForm
+    ResponseHeadersFaultsAndDelaysForm
   },
   computed: {
     ...mapFields(['mapping.response.body']),

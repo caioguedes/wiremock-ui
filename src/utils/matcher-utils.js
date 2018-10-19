@@ -13,14 +13,21 @@ export default {
       return 'urlPathPattern'
     }
   },
-  convertToMatcher (obj) {
-    return Object.keys(obj || {}).map(key => {
-      let matcher = Object.keys(obj[key])[0]
+  convertToKeyMatcherValueArray (obj) {
+    return Object.keys(obj || {}).map(keyName => {
+      let matcher = Object.keys(obj[keyName])[0]
       return {
-        key,
+        keyName,
         matcher,
-        value: obj[key][matcher]
+        value: obj[keyName][matcher]
       }
     })
+  },
+  convertToMatcherValue (obj) {
+    let matcher = Object.keys(obj)[0]
+    return {
+      matcher,
+      value: obj[matcher]
+    }
   }
 }

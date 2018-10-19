@@ -2,11 +2,19 @@ import jsonUtils from '../../utils/json.utils'
 import matcherUtils from '../../utils/matcher-utils'
 
 export default {
+
+  addResponseHeader (state) {
+    const mapping = Object.assign({}, state.mapping)
+    mapping.response.headers = mapping.response.headers.concat({})
+    state.mapping = mapping
+  },
+
   addRequestMatcher (state, arrayKey) {
     const mapping = Object.assign({}, state.mapping)
     mapping.request[arrayKey] = mapping.request[arrayKey].concat({})
     state.mapping = mapping
   },
+
   // set mapping from WireMock response
   setFromWireMock (state, mapping) {
     state.mapping = {}
@@ -27,10 +35,14 @@ export default {
     if (request.urlMatcher) {
       request.path = requestMapping[request.urlMatcher]
     }
-    request.headers = matcherUtils.convertToMatcher(requestMapping.headers)
-    request.queryParams = matcherUtils.convertToMatcher(requestMapping.queryParams)
-    request.cookies = matcherUtils.convertToMatcher(requestMapping.cookies)
-    request.bodyPatterns = requestMapping.bodyPatterns || []
+    request.headers = matcherUtils.convertToKeyMatcherValueArray(requestMapping.headers)
+    request.queryParams = matcherUtils.convertToKeyMatcherValueArray(requestMapping.queryParams)
+    request.cookies = matcherUtils.convertToKeyMatcherValueArray(requestMapping.cookies)
+    if (requestMapping.bodyPatterns) {
+      request.bodyPatterns = requestMapping.bodyPatterns.map(matcherUtils.convertToMatcherValue)
+    } else {
+      request.bodyPatterns = []
+    }
     state.mapping.request = request
 
     // response
@@ -49,6 +61,9 @@ export default {
         response.responseType = 'NO_CONTENT'
       }
     }
+    response.headers = responseMapping.headers || []
+    response.faults = responseMapping.faults || []
+    // TODO: delay
     state.mapping.response = response
 
     console.log(state)
@@ -60,9 +75,15 @@ export default {
     state.mapping.validations = clone
   },
 
-  requestMatcherChanged (state, arrayKey, index, value) {
+  requestMatcherChanged (state, { arrayKey, index, value }) {
     let arrayIndex = {}
     arrayIndex[index] = value
     state.mapping.request[arrayKey] = Object.assign([], state.mapping.request[arrayKey], arrayIndex)
+  },
+
+  responseHeaderChanged (state, { index, value }) {
+    let arrayIndex = {}
+    arrayIndex[index] = value
+    state.mapping.response.headers = Object.assign([], state.mapping.request.headers, arrayIndex)
   }
 }

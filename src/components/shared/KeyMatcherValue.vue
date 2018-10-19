@@ -1,8 +1,8 @@
 <template lang="pug">
   .columns.full-width
     .column.is-4
-      b-field(:type="getType($v.form.key)")
-        b-input(placeholder="Key" v-model="$v.form.key.$model")
+      b-field(:type="getType($v.form.keyName)")
+        b-input(placeholder="Key" v-model="$v.form.keyName.$model")
     .column.is-4
       b-field(:type="getType($v.form.matcher)")
         b-select(placeholder="Matcher" v-model="$v.form.matcher.$model" expanded)
@@ -27,7 +27,7 @@ export default {
     validationMixin
   ],
   props: {
-    matcher: {
+    kmv: {
       type: Object,
       default () {
         return {}
@@ -37,18 +37,18 @@ export default {
   data () {
     return {
       form: {
-        key: '',
+        keyName: '',
         matcher: '',
         value: ''
       }
     }
   },
   created () {
-    this.from = Object.assign(this.form, this.matcher)
+    this.from = Object.assign(this.form, this.kmv)
   },
   validations: {
     form: {
-      key: {
+      keyName: {
         required
       },
       matcher: {

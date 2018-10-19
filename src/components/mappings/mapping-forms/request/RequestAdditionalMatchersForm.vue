@@ -24,19 +24,19 @@
           .full-width
             div(v-if="isTabActive('headers')")
               .has-text-centered(v-if="headers.length <= 0") No Header Matchers
-              KeyMatcherValue(v-for="(header, index) in headers" :key="'header' + index" :matcher="header"
+              KeyMatcherValue(v-for="(header, index) in headers" :key="'header' + index" :kmv="header"
                 @change="$store.commit('requestMatcherChanged', {arrayKey: 'headers', index, value: $event})")
             div(v-if="isTabActive('bodyPatterns')")
               .has-text-centered(v-if="bodyPatterns.length <= 0") No Body Matchers
-              MatcherValue(v-for="(bodyPattern, index) in bodyPatterns" :key="'bodyPatterns' + index" :matcher="bodyPattern"
+              MatcherValue(v-for="(bodyPattern, index) in bodyPatterns" :key="'bodyPatterns' + index" :mv="bodyPattern"
                 @change="$store.commit('requestMatcherChanged', {arrayKey: 'bodyPatterns', index, value: $event})")
             div(v-if="isTabActive('queryParams')")
               .has-text-centered(v-if="queryParams.length <= 0") No Query Parameter Matchers
-              KeyMatcherValue(v-for="(queryParams, index) in queryParams" :key="'queryParams' + index" :matcher="queryParams"
+              KeyMatcherValue(v-for="(queryParams, index) in queryParams" :key="'queryParams' + index" :kmv="queryParams"
                 @change="$store.commit('requestMatcherChanged', {arrayKey: 'queryParams', index, value: $event})")
             div(v-if="isTabActive('cookies')")
               .has-text-centered(v-if="cookies.length <= 0") No Cookie Matchers
-              KeyMatcherValue(v-for="(cookies, index) in cookies" :key="'cookies' + index" :matcher="cookies"
+              KeyMatcherValue(v-for="(cookies, index) in cookies" :key="'cookies' + index" :kmv="cookies"
                 @change="$store.commit('requestMatcherChanged', {arrayKey: 'cookies', index, value: $event})")
 </template>
 
@@ -47,7 +47,7 @@ import formValidationMixin from '../../../../mixins/form-validation.mixin'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
-  name: 'RequestMoreOptionsForm',
+  name: 'RequestAdditionalMatchersForm',
   components: {
     KeyMatcherValue,
     MatcherValue
