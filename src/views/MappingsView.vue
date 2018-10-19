@@ -30,8 +30,11 @@ export default {
       this.$store.getters.currentMock().allStubMappings().then(res => {
         this.mappings = res.mappings
         this.mapping = this.mappings.find(mapping => mapping.id === this.$route.params.mappingId)
-      }).catch(() => {
-        this.mappings = []
+        if (this.mapping) {
+          this.$store.commit('setFromWireMock', this.mapping)
+        }
+      }).catch(err => {
+        console.error('Error retrieving mappings', err)
       })
     }
   },
@@ -41,6 +44,7 @@ export default {
     },
     '$route.params.mappingId' (mappingId) {
       this.mapping = this.mappings.find(mapping => mapping.id === mappingId)
+      this.$store.commit('setFromWireMock', this.mapping)
     }
   }
 }

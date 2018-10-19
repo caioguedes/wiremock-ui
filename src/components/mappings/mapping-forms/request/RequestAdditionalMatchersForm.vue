@@ -6,44 +6,45 @@
           strong Additional Matchers
           small(v-if="anyMatchers()")
             br
-            span(v-if="form.headers.length > 0") Headers{{ form.headers | count }}&nbsp;
-            span(v-if="form.bodyPatterns.length > 0") Body Matchers{{ form.bodyPatterns | count }}&nbsp;
-            span(v-if="form.queryParams.length > 0") Query Params{{ form.queryParams | count }}&nbsp;
-            span(v-if="form.cookies.length > 0") Cookies{{ form.cookies | count }}
+            span(v-if="headers.length > 0") Headers{{ headers | count }}&nbsp;
+            span(v-if="bodyPatterns.length > 0") Body Matchers{{ bodyPatterns | count }}&nbsp;
+            span(v-if="queryParams.length > 0") Query Params{{ queryParams | count }}&nbsp;
+            span(v-if="cookies.length > 0") Cookies{{ cookies | count }}
         p.panel-tabs
           a(@click="switchTab('headers')" :class="{'is-active': isTabActive('headers')}")
-            | Headers{{ form.headers | count }}
+            | Headers{{ headers | count }}
           a(@click="switchTab('bodyPatterns')" :class="{'is-active': isTabActive('bodyMatchers')}")
-            | Body Matchers{{ form.bodyPatterns | count }}
+            | Body Matchers{{ bodyPatterns | count }}
           a(@click="switchTab('queryParams')" :class="{'is-active': isTabActive('queryParams')}")
-            | Query Params{{ form.queryParams | count }}
+            | Query Params{{ queryParams | count }}
           a(@click="switchTab('cookies')" :class="{'is-active': isTabActive('cookies')}")
-            | Cookies{{ form.cookies | count }}
-          b-icon.is-pulled-right(icon="plus" @click.native="add()")
+            | Cookies{{ cookies | count }}
+          b-icon.is-pulled-right(icon="plus" @click.native="$store.commit('addRequestMatcher', activeTab)")
         .panel-block
           .full-width
             div(v-if="isTabActive('headers')")
-              .has-text-centered(v-if="form.headers.length <= 0") No Header Matchers
-              KeyMatcherValue(v-for="(header, index) in form.headers" :key="'header' + index"
-                :matcher="header" @change="matcherChanged('headers', index, $event)")
+              .has-text-centered(v-if="headers.length <= 0") No Header Matchers
+              KeyMatcherValue(v-for="(header, index) in headers" :key="'header' + index" :matcher="header"
+                @change="$store.commit('requestMatcherChanged', {arrayKey: 'headers', index, value: $event})")
             div(v-if="isTabActive('bodyPatterns')")
-              .has-text-centered(v-if="form.bodyPatterns.length <= 0") No Body Matchers
-              MatcherValue(v-for="(bodyPattern, index) in form.bodyPatterns" :key="'bodyPatterns' + index"
-                :matcher="bodyPattern" @change="matcherChanged('bodyPatterns', index, $event)")
+              .has-text-centered(v-if="bodyPatterns.length <= 0") No Body Matchers
+              MatcherValue(v-for="(bodyPattern, index) in bodyPatterns" :key="'bodyPatterns' + index" :matcher="bodyPattern"
+                @change="$store.commit('requestMatcherChanged', {arrayKey: 'bodyPatterns', index, value: $event})")
             div(v-if="isTabActive('queryParams')")
-              .has-text-centered(v-if="form.queryParams.length <= 0") No Query Parameter Matchers
-              KeyMatcherValue(v-for="(queryParams, index) in form.queryParams" :key="'queryParams' + index"
-                :matcher="queryParams" @change="matcherChanged('queryParams', index, $event)")
+              .has-text-centered(v-if="queryParams.length <= 0") No Query Parameter Matchers
+              KeyMatcherValue(v-for="(queryParams, index) in queryParams" :key="'queryParams' + index" :matcher="queryParams"
+                @change="$store.commit('requestMatcherChanged', {arrayKey: 'queryParams', index, value: $event})")
             div(v-if="isTabActive('cookies')")
-              .has-text-centered(v-if="form.cookies.length <= 0") No Cookie Matchers
-              KeyMatcherValue(v-for="(cookies, index) in form.cookies" :key="'cookies' + index"
-                :matcher="cookies" @change="matcherChanged('cookies', index, $event)")
+              .has-text-centered(v-if="cookies.length <= 0") No Cookie Matchers
+              KeyMatcherValue(v-for="(cookies, index) in cookies" :key="'cookies' + index" :matcher="cookies"
+                @change="$store.commit('requestMatcherChanged', {arrayKey: 'cookies', index, value: $event})")
 </template>
 
 <script>
 import KeyMatcherValue from '../../../shared/KeyMatcherValue'
 import MatcherValue from '../../../shared/MatcherValue'
 import formValidationMixin from '../../../../mixins/form-validation.mixin'
+import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'RequestMoreOptionsForm',
@@ -52,55 +53,32 @@ export default {
     MatcherValue
   },
   mixins: [formValidationMixin],
-  props: ['request'],
+  computed: {
+    ...mapFields([
+      'mapping.request.headers',
+      'mapping.request.queryParams',
+      'mapping.request.cookies',
+      'mapping.request.bodyPatterns'
+    ])
+  },
   data () {
     return {
       requestAdvOpts: false,
-      activeTab: 'headers',
-      form: {
-        headers: [],
-        queryParams: [],
-        cookies: [],
-        bodyPatterns: []
-      }
+      activeTab: 'headers'
     }
   },
-  created () {
-    this.form.headers = this.convertToMatchers(this.request.headers)
-    this.form.queryParams = this.convertToMatchers(this.request.queryParams)
-    this.form.cookies = this.convertToMatchers(this.request.cookies)
-    this.form.bodyPatterns = this.request.bodyPatterns || []
-  },
   methods: {
-    add () {
-      this.form[this.activeTab].push({})
-    },
     anyMatchers () {
-      return this.form.headers.length > 0 ||
-          this.form.queryParams.length > 0 ||
-          this.form.cookies.length > 0 ||
-          this.form.bodyPatterns.length > 0
+      return this.headers.length > 0 ||
+          this.queryParams.length > 0 ||
+          this.cookies.length > 0 ||
+          this.bodyPatterns.length > 0
     },
     switchTab (tab) {
       this.activeTab = tab
     },
     isTabActive (tab) {
       return this.activeTab === tab
-    },
-    matcherChanged (arrayKey, index, value) {
-      let arrayIndex = {}
-      arrayIndex[index] = value
-      this.form[arrayKey] = Object.assign([], this.form[arrayKey], arrayIndex)
-    },
-    convertToMatchers (obj) {
-      return Object.keys(obj || {}).map(key => {
-        let matcher = Object.keys(obj[key])[0]
-        return {
-          key,
-          matcher,
-          value: obj[key][matcher]
-        }
-      })
     }
   },
   filters: {

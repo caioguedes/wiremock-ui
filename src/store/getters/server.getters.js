@@ -1,6 +1,6 @@
 import router from '../../router'
 
-import Sorting from '../../utils/sorting'
+import Sorting from '../../utils/sorting-utils'
 
 export default {
   currentServer (state) {
