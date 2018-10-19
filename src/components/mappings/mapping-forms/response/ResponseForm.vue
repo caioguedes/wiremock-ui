@@ -2,9 +2,9 @@
   div
     .is-size-4 Response
     hr
-    ResponseBasicForm(:response="response" @change="form = Object.assign(form, $event)")
-    RequestHeadersFaultsAndDelaysForm(:response="response" @change="form = Object.assign(form, $event)")
-    ResponseBodyForm(v-if="form.responseType !== 'NO_CONTENT'" :response="response" @change="form = Object.assign(form, $event)")
+    ResponseBasicForm
+    RequestHeadersFaultsAndDelaysForm
+    ResponseBodyForm(v-if="responseType && responseType !== 'NO_CONTENT' && body")
 </template>
 
 <script>
@@ -12,6 +12,7 @@ import ResponseBasicForm from './ResponseBasicForm'
 import ResponseBodyForm from './ResponseBodyForm'
 import RequestHeadersFaultsAndDelaysForm from './RequestHeadersFaultsAndDelaysForm'
 import formValidationMixin from '../../../../mixins/form-validation.mixin'
+import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'ResponseForm',
@@ -21,22 +22,9 @@ export default {
     ResponseBasicForm,
     RequestHeadersFaultsAndDelaysForm
   },
-  props: {
-    response: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    }
-  },
-  data () {
-    return {
-      form: {
-        status: '',
-        responseType: '',
-        body: ''
-      }
-    }
+  computed: {
+    ...mapFields(['mapping.response.body']),
+    ...mapFields(['mapping.response.responseType'])
   }
 }
 </script>

@@ -1,3 +1,4 @@
+import jsonUtils from '../../utils/json.utils'
 import matcherUtils from '../../utils/matcher-utils'
 
 export default {
@@ -12,9 +13,11 @@ export default {
 
     // general
     // name
-    // priority
     // hidden
     // favorite
+
+    // priority
+    state.mapping.priority = mapping.priority
 
     // request
     const request = {}
@@ -32,8 +35,22 @@ export default {
 
     // response
     const response = {}
-    // const responseMapping = mapping.response
+    const responseMapping = mapping.response
+    const body = responseMapping.body
+    response.status = responseMapping.status
+    if (jsonUtils.isValidJson(responseMapping.body)) {
+      response.responseType = 'JSON'
+      response.body = jsonUtils.beautify(body)
+    } else {
+      response.body = body
+      if (body) {
+        response.responseType = 'PLAIN_TEXT'
+      } else {
+        response.responseType = 'NO_CONTENT'
+      }
+    }
     state.mapping.response = response
+
     console.log(state)
   },
 

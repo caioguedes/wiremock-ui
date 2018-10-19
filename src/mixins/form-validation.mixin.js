@@ -17,7 +17,6 @@ export default {
     form: {
       handler () {
         if (this.$v) {
-          console.log(this)
           this.$store.commit('mappingValidationChange', {
             name: this.$options.name,
             valid: !this.$v.$invalid

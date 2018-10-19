@@ -1,51 +1,22 @@
 <template lang="pug">
   div
     strong Body
-    editor(v-model="form.body" @init="editorInit" lang="json" theme="chrome" width="100%" height="400" @change="$emit('change', form)")
+    editor(v-model="body" @init="editorInit" lang="json" theme="chrome" width="100%" height="400" @change="$emit('change', form)")
 </template>
 
 <script>
 import * as editor from 'vue2-ace-editor'
-import { validationMixin } from 'vuelidate'
 import formValidationMixin from '../../../../mixins/form-validation.mixin'
-import jsonUtils from '../../../utils/json.utils'
+import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'ResponseBodyForm',
-  props: {
-    response: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    }
-  },
-  data () {
-    return {
-      form: {
-        body: ''
-      }
-    }
-  },
-  created () {
-    const body = this.response.body
-    if (jsonUtils.isValidJson(body)) {
-      this.form.body = jsonUtils.beautify(body)
-    } else {
-      this.form.body = body
-    }
-  },
-  mixins: [
-    formValidationMixin,
-    validationMixin
-  ],
+  mixins: [formValidationMixin],
   components: {
     editor
   },
-  validations: {
-    form: {
-      body: {}
-    }
+  computed: {
+    ...mapFields(['mapping.response.body'])
   },
   methods: {
     editorInit: function () {

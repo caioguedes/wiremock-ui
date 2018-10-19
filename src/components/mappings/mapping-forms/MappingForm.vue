@@ -4,9 +4,9 @@
     .v-spacer
     MappingInfoForm(:mapping="mapping" @change="form = Object.assign(form, $event)")
     .v-spacer
-    MappingRequestForm(:request="mapping.request" @change="form.request = $event")
+    MappingRequestForm
     .v-spacer
-    MappingResponseForm(:response="mapping.response" @change="form.response = $event")
+    MappingResponseForm
 </template>
 
 <script>
