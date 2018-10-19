@@ -9,19 +9,19 @@
         button.button(@click="$refs.viewRawModel.open()")
           b-icon(icon="eye")
           span View Raw
-        button.button(@click="form.hidden = !form.hidden")
+        button.button(@click="hidden = !hidden")
           b-icon(icon="plus")
           span Hide
-        button.button(@click="form.favorite = !form.favorite")
+        button.button(@click="favorite = !favorite")
           b-icon(icon="star")
           span Favorite
     .columns.align-flex-end
       .column.is-10
         b-field(label="Name")
-          b-input(v-model="form.name" placeholder="Name (Optional)")
+          b-input(v-model="name" placeholder="Name (Optional)")
       .column.is-2
         b-field(label="Priority")
-          b-input(v-model="form.priority")
+          b-input(v-model="priority")
 </template>
 
 <script>
@@ -29,12 +29,10 @@ import { validationMixin } from 'vuelidate'
 import formValidationMixin from '../../../mixins/form-validation.mixin'
 import { required } from 'vuelidate/lib/validators'
 import ViewRawModal from './ViewRawModal'
+import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'MappingInfoForm',
-  props: [
-    'mapping'
-  ],
   components: {
     ViewRawModal
   },
@@ -42,29 +40,24 @@ export default {
     formValidationMixin,
     validationMixin
   ],
+  computed: {
+    ...mapFields([
+      'mapping',
+      'mapping.name',
+      'mapping.priority',
+      'mapping.hidden',
+      'mapping.favorite'
+    ])
+  },
   data () {
     return {
-      viewRawModalActive: false,
-      form: {
-        name: '',
-        priority: 0,
-        hidden: false,
-        favorite: false
-      }
+      viewRawModalActive: false
     }
   },
   validations: {
-    form: {
-      priority: {
-        required
-      }
+    priority: {
+      required
     }
-  },
-  created () {
-    this.form.name = this.mapping.name
-    this.form.priority = this.mapping.priority
-    this.form.hidden = this.mapping.hidden
-    this.form.favorite = this.mapping.favorite
   }
 }
 </script>

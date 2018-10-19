@@ -20,9 +20,10 @@ export default {
     state.mapping = {}
 
     // general
-    // name
-    // hidden
-    // favorite
+    state.mapping.uuid = mapping.uuid
+    state.mapping.name = ''
+    state.mapping.hidden = false
+    state.mapping.favorite = false
 
     // priority
     state.mapping.priority = mapping.priority

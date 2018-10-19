@@ -2,7 +2,7 @@
   form.has-text-left
     <!--| {{ form }}-->
     .v-spacer
-    MappingInfoForm(:mapping="mapping" @change="form = Object.assign(form, $event)")
+    MappingInfoForm
     .v-spacer
     MappingRequestForm
     .v-spacer
@@ -21,26 +21,6 @@ export default {
     MappingInfoForm,
     MappingResponseForm,
     MappingRequestForm
-  },
-  data () {
-    return {
-      form: {
-        name: '',
-        priority: 0,
-        hidden: false,
-        favorite: false,
-        request: {},
-        response: {}
-      }
-    }
-  },
-  watch: {
-    form: {
-      handler () {
-        console.log('MappingForm change', this.form)
-      },
-      deep: true
-    }
   }
 }
 </script>
