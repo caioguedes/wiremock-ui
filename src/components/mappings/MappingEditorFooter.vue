@@ -4,7 +4,7 @@
       a.button.is-danger Delete
     .is-pulled-right
       a.button Cancel
-      a.button.is-success(:disabled="!$store.getters.isMappingValid") Save
+      a.button.is-success(:disabled="!$store.getters.isMappingValid()") Save
 </template>
 
 <script>

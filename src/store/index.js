@@ -36,4 +36,6 @@ export default new Vuex.Store({
   },
   getters,
   mutations
+  // TODO: enable strict mode
+  // strict: true
 })

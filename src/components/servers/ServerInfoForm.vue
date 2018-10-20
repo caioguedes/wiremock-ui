@@ -1,29 +1,21 @@
 <template lang="pug">
   form
-    b-field(label="Name" :type="getType($v.form.name)" :message="getMessage('Server Name', $v.form.name)")
-      b-input(v-model="$v.form.name.$model")
+    b-field(label="Name")
+      b-input(v-model="form.name" required)
     .columns
       b-field.column(label="Protocol")
-        b-select(v-model.trim="$v.form.protocol.$model")
+        b-select(v-model="form.protocol" required)
           option(:value="'HTTP'") HTTP
           option(:value="'HTTPS'") HTTPS
-      b-field.column(label="Host" :type="getType($v.form.host)" :message="getMessage('Host', $v.form.host)")
-        b-input(v-model.trim.lazy="$v.form.host.$model")
-      b-field.column.is-3(label="Port" :type="getType($v.form.port)" :message="getMessage('Port', $v.form.port)")
-        b-input(v-model.trim.lazy="$v.form.port.$model")
+      b-field.column(label="Host")
+        b-input(v-model="form.host" required)
+      b-field.column.is-3(label="Port")
+        b-input(v-model="form.port" min="0" max="65535" step="1" required)
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import formValidationMixin from '../../mixins/form-validation.mixin'
-import { integer, minValue, maxValue, required } from 'vuelidate/lib/validators'
-
 export default {
   name: 'ServerInfoForm',
-  mixins: [
-    formValidationMixin,
-    validationMixin
-  ],
   data () {
     return {
       form: {
@@ -34,29 +26,11 @@ export default {
       }
     }
   },
-  validations: {
-    form: {
-      host: {
-        required
-      },
-      name: {
-        required
-      },
-      protocol: {
-        required
-      },
-      port: {
-        required,
-        integer,
-        minValue: minValue(0),
-        maxValue: maxValue(65535)
-      }
-    }
-  },
   watch: {
     form: {
       handler () {
-        this.$emit('change', this.$v)
+        // TODO validate form
+        this.$emit('validation', true)
       },
       deep: true
     }

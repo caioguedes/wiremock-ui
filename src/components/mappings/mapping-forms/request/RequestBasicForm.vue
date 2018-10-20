@@ -1,18 +1,18 @@
 <template lang="pug">
   .columns
     .column
-      b-field(label="Url Matcher" :type="getType($v.urlMatcher)")
-        b-select(v-model="$v.urlMatcher.$model")
+      b-field(label="Url Matcher" required)
+        b-select(v-model="urlMatcher")
           option(value="url") Equal To
           option(value="urlPattern") Matching
           option(value="urlPath") Path Equal To
           option(value="urlPathPattern") Path Matching
     .column.is-fill
-      b-field(label="Path" :type="getType($v.path)")
-        b-input(v-model="$v.path.$model")
+      b-field(label="Path")
+        b-input(v-model="path" required)
     .column
-      b-field(label="Method" :type="getType($v.method)")
-        b-select(v-model="$v.method.$model")
+      b-field(label="Method" required)
+        b-select(v-model="method")
           option(value="GET") GET
           option(value="POST") POST
           option(value="PUT") PUT
@@ -25,9 +25,6 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import formValidationMixin from '../../../../mixins/form-validation.mixin'
-import { required } from 'vuelidate/lib/validators'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
@@ -39,21 +36,6 @@ export default {
       'mapping.request.path',
       'mapping.request.method'
     ])
-  },
-  mixins: [
-    formValidationMixin,
-    validationMixin
-  ],
-  validations: {
-    urlMatcher: {
-      required
-    },
-    path: {
-      required
-    },
-    method: {
-      required
-    }
   }
 }
 </script>

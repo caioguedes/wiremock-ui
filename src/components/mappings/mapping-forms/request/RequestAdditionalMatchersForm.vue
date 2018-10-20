@@ -43,7 +43,6 @@
 <script>
 import KeyMatcherValue from '../../../shared/KeyMatcherValue'
 import MatcherValue from '../../../shared/MatcherValue'
-import formValidationMixin from '../../../../mixins/form-validation.mixin'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
@@ -52,7 +51,6 @@ export default {
     KeyMatcherValue,
     MatcherValue
   },
-  mixins: [formValidationMixin],
   computed: {
     ...mapFields([
       'mapping.request.headers',

@@ -1,31 +1,23 @@
 <template lang="pug">
   .columns.full-width
     .column.is-4
-      b-field(:type="getType($v.form.keyName)")
-        b-input(placeholder="Key" v-model="$v.form.keyName.$model")
+      b-field
+        b-input(placeholder="Key" v-model="form.keyName" required)
     .column.is-4
-      b-field(:type="getType($v.form.matcher)")
-        b-select(placeholder="Matcher" v-model="$v.form.matcher.$model" expanded)
+      b-field
+        b-select(placeholder="Matcher" v-model="form.matcher" required expanded)
           option(value="equalTo") Equal To
           option(value="matches") Matches
           option(value="doesNotMatch") Does Not Match
           option(value="contains") Contains
     .column.is-4
-      b-field(:type="getType($v.form.value)")
-        b-input(placeholder="Value" v-model="$v.form.value.$model")
+      b-field
+        b-input(placeholder="Value" v-model="form.value" required)
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import formValidationMixin from '../../mixins/form-validation.mixin'
-import { required } from 'vuelidate/lib/validators'
-
 export default {
   name: 'KeyMatcherValue',
-  mixins: [
-    formValidationMixin,
-    validationMixin
-  ],
   props: {
     kmv: {
       type: Object,
@@ -45,19 +37,6 @@ export default {
   },
   created () {
     this.from = Object.assign(this.form, this.kmv)
-  },
-  validations: {
-    form: {
-      keyName: {
-        required
-      },
-      matcher: {
-        required
-      },
-      value: {
-        required
-      }
-    }
   }
 }
 </script>

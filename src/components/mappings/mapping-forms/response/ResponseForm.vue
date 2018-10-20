@@ -11,12 +11,10 @@
 import ResponseBasicForm from './ResponseBasicForm'
 import ResponseBodyForm from './ResponseBodyForm'
 import ResponseHeadersFaultsAndDelaysForm from './ResponseHeadersFaultsAndDelaysForm'
-import formValidationMixin from '../../../../mixins/form-validation.mixin'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'ResponseForm',
-  mixins: [formValidationMixin],
   components: {
     ResponseBodyForm,
     ResponseBasicForm,

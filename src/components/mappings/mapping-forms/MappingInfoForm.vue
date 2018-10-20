@@ -21,13 +21,10 @@
           b-input(v-model="name" placeholder="Name (Optional)")
       .column.is-2
         b-field(label="Priority")
-          b-input(v-model="priority")
+          b-input(v-model="priority" type="number" min="0" step="1")
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import formValidationMixin from '../../../mixins/form-validation.mixin'
-import { required } from 'vuelidate/lib/validators'
 import ViewRawModal from './ViewRawModal'
 import { mapFields } from 'vuex-map-fields'
 
@@ -36,10 +33,6 @@ export default {
   components: {
     ViewRawModal
   },
-  mixins: [
-    formValidationMixin,
-    validationMixin
-  ],
   computed: {
     ...mapFields([
       'mapping',
@@ -52,11 +45,6 @@ export default {
   data () {
     return {
       viewRawModalActive: false
-    }
-  },
-  validations: {
-    priority: {
-      required
     }
   }
 }

@@ -6,12 +6,10 @@
 
 <script>
 import * as editor from 'vue2-ace-editor'
-import formValidationMixin from '../../../../mixins/form-validation.mixin'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
   name: 'ResponseBodyForm',
-  mixins: [formValidationMixin],
   components: {
     editor
   },

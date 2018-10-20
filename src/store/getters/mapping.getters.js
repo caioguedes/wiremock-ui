@@ -1,10 +1,43 @@
 export default {
   isMappingValid (state) {
-    let result = true
-    let validations = state.mapping.validations
-    for (let key in validations) {
-      result = result && validations[key]
+    return () => {
+      let result = true
+      // let mapping = state.mapping
+
+      /*
+       * Misc
+       */
+      // MappingInfoForm
+      // priority
+
+      /*
+       * Request
+       */
+      // RequestBasicForm
+      // urlMatcher
+      // url
+      // method
+
+      // RequestAdditionalMatchersForm
+      // headers
+      // bodyPatterns
+      // queryParams
+      // cookies
+
+      /*
+       * Response
+       */
+      // content type
+      // status
+
+      // ResponseHeadersFaultsAndDelaysForm
+      // headers
+      // delay
+      // faults
+
+      console.log()
+
+      return result
     }
-    return result
   }
 }

@@ -4,10 +4,10 @@
       header.modal-card-head
         p.modal-card-title Add Server
       section.modal-card-body.has-text-left
-        ServerInfoForm(ref="form" @change="onFormChange($event)")
+        ServerInfoForm(ref="form" @validation="onValidationChange")
       footer.modal-card-foot.flex-end
         a.button(@click="active = false") Cancel
-        a.button.is-success(@click="addServer()" :disabled="invalid") Add Server
+        a.button.is-success(@click="addServer()" :disabled="!valid") Add Server
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       active: false,
-      invalid: false
+      valid: true
     }
   },
   components: {
@@ -34,8 +34,10 @@ export default {
         this.$router.push({ name: 'mappings', params: { serverIndex: index } })
       }
     },
-    onFormChange (form) {
-      this.invalid = form.$invalid
+    onValidationChange (valid) {
+      // TODO get form
+      console.log(this.$refs)
+      this.valid = valid
     },
     open () {
       this.active = true
